@@ -9,25 +9,44 @@ form.addEventListener('click', function(evt){
 
     itemArray.push(item);
 
-    var li = e('li', item , {class:"btn"}, {'list-style-type': "none"});
+    var li = e('li', null , null, {'list-style-type': "none", 'border-bottom': '1px  solid rgb(238, 238, 238)', 'height': '42px', 'padding-top': '3px', 'padding-bottom': '3px'});
 
     ul.appendChild(li);
 
-    var label = e('label', null, {class:"label checkbox pull-left"}, {padding: "0 .6em .0", margin:" 0 10px"});
-    li.appendChild(label);
-
-    var labelTag = document.querySelector('.label');
-    var input = e('input', null, {type:"checkbox", id:"inlineCheckbox"});
-    labelTag.appendChild(input);
-
-    var edit = e('button', "Edit", {class:"btn btn-info pull-right", type:"button"}, {margin: " 0 20px"});
+    var p = e('p', item, null, {'display':"inline"});
+    var input = e('input',null, {type:"checkbox", id:"inlineCheckbox", name:"checkbox"}, null);
+    var edit = e('button', "Edit", {class:"btn btn-info pull-right edit", type:"button"}, {margin: " 0 20px"});
     var deleteButton = e('button', "Delete", {class:"btn btn-danger pull-right"});
+
+    li.appendChild(input);
+    li.appendChild(p);
     li.appendChild(edit);
     li.appendChild(deleteButton);
 
+    itemComplete();
+
     evt.preventDefault();
 
+
+
 });
+
+function itemComplete(){
+    var editButton = document.querySelector('.edit');
+
+    var inputSelect = document.getElementsByName("checkbox");
+
+    for (var i = 0; i < inputSelect.length; i++) {
+        var input = inputSelect[i];
+        if (input.checked) {
+            console.log('hello');
+        }
+    }
+
+}
+
+
+
 
 
 
@@ -50,10 +69,10 @@ function e(elementType, text, attributes, styles) {
     return element;
 }
 
-document.querySelector('h1').addEventListener("click", function (evt) {
-    console.log(this);
-    console.log(evt);
-});
+// document.querySelector('h1').addEventListener("click", function (evt) {
+//     console.log(this);
+//     console.log(evt);
+// });
 
 
 
