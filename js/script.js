@@ -29,6 +29,7 @@ form.addEventListener('click', function(evt){
 
     input.onclick = itemComplete;
     deleteButton.onclick = itemDelete;
+    edit.onclick = editItem;
 
     evt.preventDefault();
 
@@ -65,10 +66,14 @@ function itemDelete(){
 
 }
 
+function editItem(){
+    var newText = prompt("Please enter the new item.");
+    var itemEdit = this.id.replace('edit', "");
+    var editP = document.querySelector('#p'+itemEdit);
 
+    editP.innerText = newText;
 
-
-
+}
 
 function e(elementType, text, attributes, styles) {
     var element = document.createElement(elementType);
