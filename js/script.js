@@ -4,18 +4,22 @@ var form = document.querySelector('#submit');
 
 var itemArray = [];
 
+var totalItems = 0;
+
 form.addEventListener('click', function(evt){
+    totalItems++;
+
     var item = document.querySelector('#toDoItem').value;
 
     itemArray.push(item);
 
-    var li = e('li', null , null, {'list-style-type': "none", 'border-bottom': '1px  solid rgb(238, 238, 238)', 'height': '42px', 'padding-top': '3px', 'padding-bottom': '3px'});
+    var li = e('li', null , {id:'li'+totalItems}, {'list-style-type': "none", 'border-bottom': '1px  solid rgb(238, 238, 238)', 'height': '42px', 'padding-top': '3px', 'padding-bottom': '3px'});
 
     ul.appendChild(li);
 
-    var p = e('p', item, null, {'display':"inline"});
-    var input = e('input',null, {type:"checkbox", id:"inlineCheckbox", name:"checkbox"}, null);
-    var edit = e('button', "Edit", {class:"btn btn-info pull-right edit", type:"button"}, {margin: " 0 20px"});
+    var p = e('p', item, {id:'p'+totalItems}, {'display':"inline"});
+    var input = e('input',null, {type:"checkbox", id:"inlineCheckbox"+totalItems, name:"checkbox"}, null);
+    var edit = e('button', "Edit", {id: 'edit'+totalItems, class:"btn btn-info pull-right", type:"button"}, {margin: " 0 20px"});
     var deleteButton = e('button', "Delete", {class:"btn btn-danger pull-right"});
 
     li.appendChild(input);
@@ -23,7 +27,7 @@ form.addEventListener('click', function(evt){
     li.appendChild(edit);
     li.appendChild(deleteButton);
 
-    itemComplete();
+    input.onclick = itemComplete;
 
     evt.preventDefault();
 
@@ -32,17 +36,20 @@ form.addEventListener('click', function(evt){
 });
 
 function itemComplete(){
-    var editButton = document.querySelector('.edit');
+    var check = this.id.replace("inlineCheckbox", "");
+    var btn = document.querySelector('#edit'+totalItems);
+    var strikethrough = document.querySelector('#p'+totalItems);
+    // btn.setAttribute('disabled', 'disabled');
+    // strikethrough.style.textDecoration = 'line-through';
 
-    var inputSelect = document.getElementsByName("checkbox");
-
-    for (var i = 0; i < inputSelect.length; i++) {
-        var input = inputSelect[i];
-        if (input.checked) {
-            console.log('hello');
-        }
+    if(this.checked){
+        
+        btn.setAttribute('disabled', 'disabled');
+        strikethrough.style.textDecoration = 'line-through';
+    } else {
+        strikethrough.style.textDecoration = 'none';
+        btn.removeAttribute('disabled');
     }
-
 }
 
 
