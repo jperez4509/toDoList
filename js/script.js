@@ -1,9 +1,5 @@
 var ul = document.querySelector('ul');
-
 var form = document.querySelector('#submit');
-
-var itemArray = [];
-
 var totalItems = 0;
 
 form.addEventListener('click', function(evt){
@@ -11,16 +7,14 @@ form.addEventListener('click', function(evt){
 
     var item = document.querySelector('#toDoItem').value;
 
-    itemArray.push(item);
-
     var li = e('li', null , {id:'li'+totalItems}, {'list-style-type': "none", 'border-bottom': '1px  solid rgb(238, 238, 238)', 'height': '42px', 'padding-top': '3px', 'padding-bottom': '3px'});
 
     ul.appendChild(li);
 
     var p = e('p', item, {id:'p'+totalItems}, {'display':"inline"});
     var input = e('input',null, {type:"checkbox", id:"inlineCheckbox"+totalItems, name:"checkbox"}, null);
-    var edit = e('button', "Edit", {id: 'edit'+totalItems, class:"btn btn-info pull-right", type:"button"}, {margin: " 0 20px"});
-    var deleteButton = e('button', "Delete", {id: 'delete'+totalItems, class:"btn btn-danger pull-right"});
+    var edit = e('button', "Edit", {id: 'edit'+totalItems, class:"btn btn-info pull-right", type:"button"});
+    var deleteButton = e('button', "Delete", {id: 'delete'+totalItems, class:"btn btn-danger pull-right"}, {margin: '0 10px'});
 
     li.appendChild(input);
     li.appendChild(p);
@@ -32,9 +26,6 @@ form.addEventListener('click', function(evt){
     edit.onclick = editItem;
 
     evt.preventDefault();
-
-
-
 });
 
 function itemComplete(){
@@ -93,11 +84,6 @@ function e(elementType, text, attributes, styles) {
 
     return element;
 }
-
-// document.querySelector('h1').addEventListener("click", function (evt) {
-//     console.log(this);
-//     console.log(evt);
-// });
 
 
 
