@@ -20,7 +20,7 @@ form.addEventListener('click', function(evt){
     var p = e('p', item, {id:'p'+totalItems}, {'display':"inline"});
     var input = e('input',null, {type:"checkbox", id:"inlineCheckbox"+totalItems, name:"checkbox"}, null);
     var edit = e('button', "Edit", {id: 'edit'+totalItems, class:"btn btn-info pull-right", type:"button"}, {margin: " 0 20px"});
-    var deleteButton = e('button', "Delete", {class:"btn btn-danger pull-right"});
+    var deleteButton = e('button', "Delete", {id: 'delete'+totalItems, class:"btn btn-danger pull-right"});
 
     li.appendChild(input);
     li.appendChild(p);
@@ -28,6 +28,7 @@ form.addEventListener('click', function(evt){
     li.appendChild(deleteButton);
 
     input.onclick = itemComplete;
+    deleteButton.onclick = itemDelete;
 
     evt.preventDefault();
 
@@ -37,10 +38,8 @@ form.addEventListener('click', function(evt){
 
 function itemComplete(){
     var check = this.id.replace("inlineCheckbox", "");
-    var btn = document.querySelector('#edit'+totalItems);
-    var strikethrough = document.querySelector('#p'+totalItems);
-    // btn.setAttribute('disabled', 'disabled');
-    // strikethrough.style.textDecoration = 'line-through';
+    var btn = document.querySelector('#edit'+check);
+    var strikethrough = document.querySelector('#p'+check);
 
     if(this.checked){
         
@@ -50,6 +49,20 @@ function itemComplete(){
         strikethrough.style.textDecoration = 'none';
         btn.removeAttribute('disabled');
     }
+}
+
+function itemDelete(){
+    var d = confirm("Are you sure you want to delete this item");
+    var deleteBtn = this.id.replace("delete", "");
+
+    if(d){
+        var liContainer = document.querySelector('ul');
+        var deleteItem = document.querySelector('#li'+deleteBtn);
+        liContainer.removeChild(deleteItem);
+    } else {
+        alert("Item not canceled.")
+    }
+
 }
 
 
