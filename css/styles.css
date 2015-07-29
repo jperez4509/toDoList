@@ -1,0 +1,29 @@
+
+body {
+	background-image: url(../img/black_linen_v2.png);
+	background-position: center;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.label {
+    padding: 0 .6em .0;
+}
+
+.checkbox input[type=checkbox], 
+.checkbox-inline input[type=checkbox], 
+.radio input[type=radio], 
+.radio-inline input[type=radio] {
+    position: relative;
+}
+
+.center {
+	float: none;
+	margin: 0 auto;
+	background-color: #fff;
+	border-radius: 5px;
+}
+
+ul {
+	padding-left: 0;
+}
