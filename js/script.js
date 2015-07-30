@@ -5,6 +5,9 @@ var totalItems = 0;
 form.addEventListener('click', function(evt){
     totalItems++;
 
+    var h3 = document.querySelector('#h3');
+    h3.textContent = 'Current List';
+
     var item = document.querySelector('#toDoItem').value;
 
     var li = e('li', null , {id:'li'+totalItems}, {'list-style-type': "none", 'border-bottom': '1px  solid rgb(238, 238, 238)', 'height': '42px', 'padding-top': '3px', 'padding-bottom': '3px'});
@@ -21,9 +24,13 @@ form.addEventListener('click', function(evt){
     li.appendChild(edit);
     li.appendChild(deleteButton);
 
-    input.onclick = itemComplete;
-    deleteButton.onclick = itemDelete;
-    edit.onclick = editItem;
+    // input.onclick = itemComplete;
+    // deleteButton.onclick = itemDelete;
+    // edit.onclick = editItem;
+
+    input.addEventListener('click', itemComplete);
+    deleteButton.addEventListener('click', itemDelete);
+    edit.addEventListener('click', editItem);
 
     evt.preventDefault();
 });
@@ -58,9 +65,11 @@ function itemDelete(){
 }
 
 function editItem(){
-    var newText = prompt("Please enter the new item.");
     var itemEdit = this.id.replace('edit', "");
     var editP = document.querySelector('#p'+itemEdit);
+    var t = editP.textContent;
+    var newText = prompt("Please enter the new item.", t );
+    
 
     editP.innerText = newText;
 
